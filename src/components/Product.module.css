@@ -1,0 +1,9 @@
+.card {
+    display: flex;
+    padding: 15px;
+    border: 1px solid black;
+}
+
+.h6 {
+    margin: auto;
+}
