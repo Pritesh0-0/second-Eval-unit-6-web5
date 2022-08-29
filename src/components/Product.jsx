@@ -1,42 +1,32 @@
 import React from "react";
 
 const Product = () => {
-  // Note: this id should come from api
+  const [products, setProducts] = React.useState([]);
 
-  state = {
-    products: []
-  }
-  componentDidMount = () => {
-    fetch('http://localhost:8080/products')
-    .then(res => res.json())
-    .then((data) => {
-      this.setState({ products: data })
-      console.log(this.state.products)
-    })
-    .catch(console.log)
-  }
+  React.useEffect(() => {
+    fetch(`http://localhost:8080/products`)
+      .then((res) => res.json())
+      .then((res) => setProducts(res))
+      .catch((err) => console.log(err));
+  }, []);
+
 
   const product = { id: 1 };
   return (
+    
     <div data-cy={`product-${product.id}`}>
-      <div>
-       {this.state.productss.map((product) =>  (
-        <div>
-          <div>
-          <h3 data-cy="product-name">{product.name}</h3>
-      <h6 data-cy="product-description">{product.description}</h6>
-      <h6 className="card-subtitle mb-2 text-muted">
-              { product.completed &&
-                <span>
-                Completed
-                </span>
-              }
-              { !product.completed &&
-                <span>
-                  Pending
-                </span>
-              }              
-              </h6>
+      
+          
+            {products?.map((product) => (
+              <div>
+              <h3 data-cy="product-name">{product.name}</h3>
+              <h6 data-cy="product-description">{product.description}</h6>
+              </div>
+            ))}
+          
+          
+          
+     
       <button data-cy="product-add-item-to-cart-button"></button>
       <div>
         <button data-cy="product-increment-cart-item-count-button"></button>
@@ -50,10 +40,7 @@ const Product = () => {
       </div>
       
           </div>
-        </div>
-          ))} 
-       </div>
-       </div>
+     
         
     
   );

@@ -21,7 +21,7 @@ const Login = () => {
         .then((res) => res.json())
         .then((res) => {
           if (res.token) {
-            navigate("/");
+            navigate("/Product");
           }
         })
         .catch((err) => {
