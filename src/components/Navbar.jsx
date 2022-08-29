@@ -1,15 +1,32 @@
 import React from "react";
+import styled from "styled-components";
+import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
-// use react-router Link or NavLink
-const Link = <a />;
-
+const NavbarWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  background: pink;
+  color: white;
+  padding: 20px;
+`;
+const StyledLink = styled(Link)`
+  color: green;
+`;
 const Navbar = () => {
+  let navigate = useNavigate(); 
+  const routeChange = () =>{ 
+    let path = `/Login`; 
+    navigate(path);
+  }
   return (
-    <div data-cy="navbar">
-      <Link data-cy="navbar-home-link"></Link>
-      <span data-cy="navbar-cart-items-count">{/* count here */}</span>
-      <button data-cy="navbar-login-logout-button"></button>
-    </div>
+    <NavbarWrapper data-cy="navbar">
+      <StyledLink data-cy="navbar-home-link" to="/">Home</StyledLink>
+      <span data-cy="navbar-cart-items-count" >{/* count here */}</span>
+      <button data-cy="navbar-login-logout-button" onClick={routeChange}>Login</button>
+    </NavbarWrapper>
   );
 };
 
